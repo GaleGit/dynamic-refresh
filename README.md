@@ -81,3 +81,14 @@ Remove-Item "C:\Program Files\QRes" -Recurse -Force
 
 **Plug in = 120 Hz Unplug = 60 Hz**  
 Simple. Efficient. Quiet.
+
+
+## ⚠️ THIS REPOSITORY USES THE QRES.EXE FROM ANOTHER OPENSOURCE PROJECT:
+here is the link to the original source:
+https://sourceforge.net/projects/qres/
+
+
+
+
+
+
