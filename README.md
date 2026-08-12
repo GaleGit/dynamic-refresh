@@ -15,8 +15,9 @@ Path: `C:\Program Files\QRes\`
 | **qres.ps1** | Checks if your laptop is on AC or battery and triggers QRes. |
 | **qres.vbs** | Runs the PowerShell script silently (no window). |
 | **taskschd.xml** | Task Scheduler configuration file. |
+| **Toggle Refresh Rate.lnk** | Desktop shortcut to trigger refresh rate switch manually. |
 | **install.bat** | Offline batch installer for USB backups. |
-| **uninstall.bat** | Offline batch uninstaller. |
+| **uninstall.bat** | Interactive batch uninstaller. |
 | **setup.ps1** | Complete PowerShell setup script. |
 
 ---
@@ -28,10 +29,8 @@ Path: `C:\Program Files\QRes\`
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
+irm "[https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1](https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1)" | iex
 ```
-
-*(Or use the original repository: `protocol4/dynamic-refresh`)*
 
 ---
 
@@ -39,6 +38,12 @@ irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" |
 
 1. Copy the `C:\Program Files\QRes` folder to a USB drive or local backup.
 2. On a new PC, right-click `install.bat` inside that folder and select **Run as administrator**.
+
+---
+
+## 🖥️ Manual Execution
+A **Toggle Refresh Rate** shortcut will automatically be created on your Desktop during setup.  
+Double-clicking this icon will trigger `qres.vbs` silently in the background without popping up any command windows.
 
 ---
 
@@ -81,14 +86,17 @@ If your display flickers momentarily, it worked.
 
 ## 🧹 Uninstall
 
-### Option A: Via Batch File
-Right-click `uninstall.bat` inside `C:\Program Files\QRes` and select **Run as administrator**.
+### Option A: Via Batch File (Recommended)
+1. Right-click `uninstall.bat` inside `C:\Program Files\QRes` and select **Run as administrator**.
+2. The script will remove the scheduled task and desktop shortcut first.
+3. You will be prompted `(Y/N)` whether you want to delete the `C:\Program Files\QRes` folder or keep your script files for future tweaks/reinstalls.
 
 ### Option B: Via PowerShell Command
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-Unregister-ScheduledTask -TaskName "dynamic-refresh" -Confirm:$false -ErrorAction SilentlyContinue; Remove-Item "C:\Program Files\QRes" -Recurse -Force
+Unregister-ScheduledTask -TaskName "dynamic-refresh" -Confirm:$false -ErrorAction SilentlyContinue; Remove-Item "$env:USERPROFILE\Desktop\Toggle Refresh Rate.lnk" -ErrorAction SilentlyContinue;
+Remove-Item "C:\Program Files\QRes" -Recurse -Force
 ```
 
 ---
