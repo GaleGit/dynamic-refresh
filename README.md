@@ -23,6 +23,14 @@ Open **PowerShell as Administrator** and run:
 ```powershell
 irm "https://raw.githubusercontent.com/protocol4/dynamic-refresh/main/setup.ps1" | iex
 ```
+or
+```powershell
+irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
+```
+or
+```powershell
+irm "https://raw.githubusercontent.com/<<YOUR_OWN_USERNAME>>/dynamic-refresh/main/setup.ps1" | iex
+```
 
 That’s it.  
 When you plug in your charger → refresh rate jumps to **120 Hz**  
