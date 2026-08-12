@@ -21,15 +21,15 @@ Path: `C:\Program Files\QRes\`
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm "https://raw.githubusercontent.com/protocol4/dynamic-refresh/main/setup.ps1" | iex
-```
-or
-```powershell
 irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
 ```
-or
+or (for the original)
 ```powershell
-irm "https://raw.githubusercontent.com/<<YOUR_OWN_USERNAME>>/dynamic-refresh/main/setup.ps1" | iex
+irm "https://raw.githubusercontent.com/protocol4/dynamic-refresh/main/setup.ps1" | iex
+```
+or (if my username has changed)
+```powershell
+irm "https://raw.githubusercontent.com/<<MY_OWN_USERNAME>>/dynamic-refresh/main/setup.ps1" | iex
 ```
 
 That’s it.  
