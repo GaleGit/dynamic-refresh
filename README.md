@@ -6,6 +6,7 @@ No ugly PowerShell or CMD windows, no manual setup — just install once and for
 ---
 
 ## 📁 Included Files
+
 Path: `C:\Program Files\QRes\`
 
 | File | Description |
@@ -14,39 +15,43 @@ Path: `C:\Program Files\QRes\`
 | **qres.ps1** | Checks if your laptop is on AC or battery and triggers QRes. |
 | **qres.vbs** | Runs the PowerShell script silently (no window). |
 | **taskschd.xml** | Task Scheduler configuration file. |
+| **install.bat** | Offline batch installer for offline USB backups. |
+| **setup.ps1** | Complete PowerShell setup script. |
+
 ---
 
-## ⚙️ Installation (One-Command Setup)
+## ⚙️ Installation
+
+### 🌐 One-Command Online Setup
 
 Open **PowerShell as Administrator** and run:
 
 ```powershell
 irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
 ```
-or (for the original)
-```powershell
-irm "https://raw.githubusercontent.com/protocol4/dynamic-refresh/main/setup.ps1" | iex
-```
-or (if my username has changed)
-```powershell
-irm "https://raw.githubusercontent.com/<<MY_OWN_USERNAME>>/dynamic-refresh/main/setup.ps1" | iex
-```
 
-That’s it.  
-When you plug in your charger → refresh rate jumps to **120 Hz**  
-When you unplug → refresh rate drops to **60 Hz**  
+*(Or use the original repository: `protocol4/dynamic-refresh`)*
+
+---
+
+### 💾 Offline Setup (USB Backup)
+
+1. Copy the `C:\Program Files\QRes` folder to a USB drive or local backup.
+2. On a new PC, right-click `install.bat` inside that folder and select **Run as administrator**.
 
 ---
 
 ## 🧠 How It Works
+
 Windows logs two power events:
-- **Event ID 105** → Plugged in  
-- **Event ID 104** → Unplugged  
+* **Event ID 105** → Plugged in  
+* **Event ID 104** → Unplugged  
 
 The scheduled task listens for those and silently runs `qres.vbs`, which launches `qres.ps1`.  
 That script checks power status and switches refresh rates using `QRes.exe`.
 
-Default logic inside the script:
+Default logic inside `qres.ps1`:
+
 ```powershell
 if ((Get-CimInstance -ClassName Win32_Battery).BatteryStatus -eq 2) {
     Start-Process "C:\Program Files\QRes\QRes.exe" -ArgumentList "/r:120" -WindowStyle Hidden
@@ -58,45 +63,35 @@ if ((Get-CimInstance -ClassName Win32_Battery).BatteryStatus -eq 2) {
 ---
 
 ## 🧩 Customizing
-Edit the two numbers in `qres.ps1` to your preferred refresh rates.  
-Examples:
-- `/r:120` → `/r:360`
-- `/r:60` → `/r:144`
+
+Edit the refresh rates in `qres.ps1` (`C:\Program Files\QRes\qres.ps1`) to your preferred target rates:
+* `/r:120` → `/r:165` or `/r:240`
+* `/r:60` → `/r:144`
 
 To test manually, run:
+
 ```powershell
 wscript.exe "C:\Program Files\QRes\qres.vbs"
 ```
-If your display flickers, it worked.
+
+If your display flickers momentarily, it worked.
 
 ---
 
 ## 🧹 Uninstall
-To remove everything (RUN TERMINAL AS ADMIN):
+
+Open **PowerShell as Administrator** and run:
+
 ```powershell
-Unregister-ScheduledTask -TaskName "AutoRefreshRate" -Confirm:$false
-Remove-Item "C:\Program Files\QRes" -Recurse -Force
+Unregister-ScheduledTask -TaskName "dynamic-refresh" -Confirm:$false -ErrorAction SilentlyContinue; Remove-Item "C:\Program Files\QRes" -Recurse -Force
 ```
 
 ---
 
-## ⚠️ Notes
-- Works on **Windows 10/11**.  
-- Needs **Administrator privileges** for install.  
-- Task runs fully silent once set up.
+## ⚠️ Notes & Credits
 
----
+* Works on **Windows 10 / 11**.  
+* Requires **Administrator privileges** to install.  
+* Runs completely silent in the background.
 
-**Plug in = 120 Hz Unplug = 60 Hz**  
-Simple. Efficient. Quiet.
-
-
-## ⚠️ THIS REPOSITORY USES THE QRES.EXE FROM ANOTHER OPENSOURCE PROJECT:
-here is the link to the original source:
-https://sourceforge.net/projects/qres/
-
-
-
-
-
-
+This repository uses **QRes.exe** from the open-source project hosted on [SourceForge](https://sourceforge.net/projects/qres/).
