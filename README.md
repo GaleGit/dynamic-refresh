@@ -72,7 +72,7 @@ If your display flickers, it worked.
 ---
 
 ## 🧹 Uninstall
-To remove everything:
+To remove everything (RUN TERMINAL AS ADMIN):
 ```powershell
 Unregister-ScheduledTask -TaskName "AutoRefreshRate" -Confirm:$false
 Remove-Item "C:\Program Files\QRes" -Recurse -Force
