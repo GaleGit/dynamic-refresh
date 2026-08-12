@@ -15,7 +15,8 @@ Path: `C:\Program Files\QRes\`
 | **qres.ps1** | Checks if your laptop is on AC or battery and triggers QRes. |
 | **qres.vbs** | Runs the PowerShell script silently (no window). |
 | **taskschd.xml** | Task Scheduler configuration file. |
-| **install.bat** | Offline batch installer for offline USB backups. |
+| **install.bat** | Offline batch installer for USB backups. |
+| **uninstall.bat** | Offline batch uninstaller. |
 | **setup.ps1** | Complete PowerShell setup script. |
 
 ---
@@ -27,7 +28,7 @@ Path: `C:\Program Files\QRes\`
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
+irm "[https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1](https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1)" | iex
 ```
 
 *(Or use the original repository: `protocol4/dynamic-refresh`)*
@@ -80,6 +81,10 @@ If your display flickers momentarily, it worked.
 
 ## 🧹 Uninstall
 
+### Option A: Via Batch File
+Right-click `uninstall.bat` inside `C:\Program Files\QRes` and select **Run as administrator**.
+
+### Option B: Via PowerShell Command
 Open **PowerShell as Administrator** and run:
 
 ```powershell
