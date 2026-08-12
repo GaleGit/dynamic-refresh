@@ -17,7 +17,7 @@ try {
     $repoUrl = "https://github.com/GaleGit/dynamic-refresh/archive/refs/heads/main.zip"
     Write-Host "Downloading repository from $repoUrl ..."
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    Invoke-WebRequest -Uri $repoUrl -OutFile$tempZip -UseBasicParsing -ErrorAction Stop
+    Invoke-WebRequest -Uri $repoUrl -OutFile $tempZip -UseBasicParsing -ErrorAction Stop
     if (!(Test-Path $tempZip)) {
         throw "Download failed — check internet connection or repo URL."
     }
