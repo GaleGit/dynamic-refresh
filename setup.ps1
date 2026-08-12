@@ -61,19 +61,19 @@ try {
 
     # 6. Create Shortcut in C:\Program Files\QRes and on Desktop
     Write-Host "Creating desktop shortcut..."
-    $WshShell = New-Object -ComObject WScript.Shell
+    $WshShell = New-Object -ComObject WScript.Shell;
     
-    $FolderShortcut = Join-Path $installPath "Toggle Refresh Rate.lnk"
-    $Shortcut = $WshShell.CreateShortcut($FolderShortcut)
-    $Shortcut.TargetPath = "wscript.exe"
-    $Shortcut.Arguments = "`"$installPath\qres.vbs`""
-    $Shortcut.WorkingDirectory = $installPath
-    $Shortcut.IconLocation = "$installPath\QRes.exe,0"
-    $Shortcut.Save()
+    $FolderShortcut = Join-Path $installPath "Toggle Refresh Rate.lnk";
+    $Shortcut = $WshShell.CreateShortcut($FolderShortcut);
+    $Shortcut.TargetPath = "wscript.exe";
+    $Shortcut.Arguments = "`"$installPath\qres.vbs`"";
+    $Shortcut.WorkingDirectory = $installPath;
+    $Shortcut.IconLocation = "$installPath\QRes.exe,0";
+    $Shortcut.Save();
 
-    $DesktopPath = [Environment]::GetFolderPath('Desktop')
+    $DesktopPath = [Environment]::GetFolderPath('Desktop');
     if (Test-Path $DesktopPath) {
-        Copy-Item -Path $FolderShortcut -Destination "$DesktopPath\Toggle Refresh Rate.lnk" -Force
+        Copy-Item -Path $FolderShortcut -Destination "$DesktopPath\Toggle Refresh Rate.lnk" -Force;
     }
 
     # 7. Clean up temporary download files
