@@ -28,7 +28,7 @@ Path: `C:\Program Files\QRes\`
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm "[https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1](https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1)" | iex
+irm "https://raw.githubusercontent.com/GaleGit/dynamic-refresh/main/setup.ps1" | iex
 ```
 
 *(Or use the original repository: `protocol4/dynamic-refresh`)*
