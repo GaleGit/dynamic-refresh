@@ -1,7 +1,7 @@
 # Requires -RunAsAdministrator
 # ============================================================
 # Dynamic Refresh - Setup Script
-# (version without changing ExecutionPolicy)
+# (GaleGit Fork - Offline Backup Ready)
 # ============================================================
 
 try {
@@ -14,7 +14,7 @@ try {
 
     # 2. Download repo zip
     $tempZip = "$env:TEMP\dynamic-refresh.zip"
-    $repoUrl = "https://github.com/protocol-8/dynamic-refresh/archive/refs/heads/main.zip"
+    $repoUrl = "https://github.com/GaleGit/dynamic-refresh/archive/refs/heads/main.zip"
     Write-Host "Downloading repository from $repoUrl ..."
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Invoke-WebRequest -Uri $repoUrl -OutFile $tempZip -UseBasicParsing -ErrorAction Stop
@@ -59,14 +59,10 @@ try {
     Register-ScheduledTask -Xml $xmlText -TaskName $taskName -User $TaskUser -Force
     Start-Sleep -Seconds 1
 
-    # 6. Clean up temp files
-    Write-Host "Cleaning up temporary files..."
+    # 6. Clean up temp extraction files (retaining install.bat & setup.ps1 in C:\Program Files\QRes)
+    Write-Host "Cleaning up temporary download files..."
     Remove-Item $tempZip -Force -ErrorAction SilentlyContinue
     Remove-Item $tempExtract -Recurse -Force -ErrorAction SilentlyContinue
-    $InstalledScript = Join-Path $installPath "setup.ps1"
-    if (Test-Path $InstalledScript) {
-        Remove-Item $InstalledScript -Force
-    }
     Start-Sleep -Seconds 1
 
     Write-Host "------------------------------------------------------------------"
